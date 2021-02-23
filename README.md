@@ -1,6 +1,6 @@
 # Ruby on Rails Tutorial sample application - Freshly
 
-This is the sample application for
+This is the third application for
 [*Ruby on Rails Tutorial:
 Learn Web Development with Rails*](https://www.railstutorial.org/)
 (6th Edition)

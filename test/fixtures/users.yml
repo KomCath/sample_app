@@ -34,6 +34,13 @@ baguera:
   activated: true
   activated_at: <%= Time.zone.now %>
 
+thor:
+  name: Thor
+  email: thor@thor.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
 <% 30.times do |n| %>
 user_<%= n %>:
   name: <%= "User " + "#{n}" %>

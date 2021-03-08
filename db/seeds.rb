@@ -1,6 +1,6 @@
 puts "🌱Start seeding"
 
-# Create a main sample user.
+# Users
 User.create!(name:  "Hunter",
              email: "hunter@hunter.com",
              password:              "password",
@@ -9,9 +9,8 @@ User.create!(name:  "Hunter",
              activated:    true,
              activated_at: Time.zone.now)
 
-# Generate a bunch of additional users.
-50.times do |n|
-  name  = Faker::Name.name
+60.times do |n|
+  name  = Faker::TvShows::GameOfThrones.character
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(name:  name,
@@ -22,11 +21,19 @@ User.create!(name:  "Hunter",
                activated_at: Time.zone.now)
 end
 
-# Generate a bunch of microposts.
+# Microposts
 users = User.order(:created_at).take(6)
 35.times do
   content = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.microposts.create!(content: content) }
 end
+
+# Relationships
+users = User.all
+user = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
 
 puts "🌻Finished seeding"

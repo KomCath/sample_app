@@ -1,0 +1,15 @@
+one:
+  follower: pandora
+  followed: hunter
+
+two:
+  follower: pandora
+  followed: pequena
+
+three:
+  follower: hunter
+  followed: pandora
+
+four:
+  follower: baguera
+  followed: pandora

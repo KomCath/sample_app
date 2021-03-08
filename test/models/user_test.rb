@@ -78,4 +78,41 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should follow and unfollow a user" do
+    pandora = users(:pandora)
+    baguera  = users(:baguera)
+    assert_not pandora.following?(baguera)
+    pandora.follow(baguera)
+    assert pandora.following?(baguera)
+    assert baguera.followers.include?(pandora)
+    pandora.unfollow(baguera)
+    assert_not pandora.following?(baguera)
+    assert_not baguera.followers.include?(pandora)
+    # Users can't follow themselves.
+    pandora.follow(pandora)
+    assert_not pandora.following?(pandora)
+  end
+
+  test "feed should have the right posts" do
+    pandora = users(:pandora)
+    baguera = users(:baguera)
+    hunter  = users(:hunter)
+    # Posts from followed user
+    hunter.microposts.each do |post_following|
+      assert pandora.feed.include?(post_following)
+    end
+    # Self-posts for user with followers
+    pandora.microposts.each do |post_self|
+      assert pandora.feed.include?(post_self)
+    end
+    # Self-posts for user with no followers
+    baguera.microposts.each do |post_self|
+      assert baguera.feed.include?(post_self)
+    end
+    # Posts from unfollowed user
+    baguera.microposts.each do |post_unfollowed|
+      assert_not pandora.feed.include?(post_unfollowed)
+    end
+  end
 end

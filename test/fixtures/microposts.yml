@@ -44,3 +44,13 @@ van:
   content: "Dude, this van's, like, rolling probable cause."
   created_at: <%= 4.hours.ago %>
   user: pequena
+
+food:
+  content: "Not in the mood for fish today."
+  created_at: <%= 6.hours.ago %>
+  user: baguera
+
+movie:
+  content: "Let's go watch the Avengers!"
+  created_at: <%= 6.hours.ago %>
+  user: baguera
